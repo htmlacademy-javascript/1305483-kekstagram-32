@@ -1,4 +1,4 @@
-const MESSAGES = [
+const Messages = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -7,7 +7,7 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const NAMES = [
+const Names = [
   'Вася',
   'Петя',
   'Маша',
@@ -24,7 +24,7 @@ const NAMES = [
   'Синьор Помидор',
 ];
 
-const DESCRIPTIONS = [
+const Descriptions = [
   'Фото заката',
   'Фото восхода',
   'Эльбрус',
@@ -42,22 +42,22 @@ const DESCRIPTIONS = [
   'Уреки',
 ];
 
-const LIKES = {
+const Likes = {
   MIN: 15,
   MAX: 200,
 };
 
-const COMMENTS = {
+const Comments = {
   MIN: 0,
   MAX: 30,
 };
 
-const AVATARS = {
+const Avatars = {
   MIN: 1,
   MAX: 6,
 };
 
-const PHOTOS = {
+const Photos = {
   MIN: 0,
   MAX: 25,
 };
@@ -73,30 +73,27 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
 
 const createId = () => {
   let id = 1;
-  return () => {
-    id++;
-    return id;
-  };
+  return () => ++id;
 };
 
-const randomId = createId();
+const newId = createId();
 
 const createComment = () => ({
-  id: randomId(),
-  avatar: `img/avatar-${getRandomInteger(AVATARS.MIN, AVATARS.MAX)}.svg`,
-  message: getRandomArrayElement(MESSAGES),
-  name: getRandomArrayElement(NAMES),
+  id: newId(),
+  avatar: `img/avatar-${getRandomInteger(Avatars.MIN, Avatars.MAX)}.svg`,
+  message: getRandomArrayElement(Messages),
+  name: getRandomArrayElement(Names),
 });
 
 const createPhoto = (index) => ({
   id: index,
   url: `photos/${index}.jpg`,
-  description: getRandomArrayElement(DESCRIPTIONS),
-  likes: getRandomInteger(LIKES.MIN, LIKES.MAX),
-  comments: Array.from({length: getRandomInteger(COMMENTS.MIN, COMMENTS.MAX)}, createComment),
+  description: getRandomArrayElement(Descriptions),
+  likes: getRandomInteger(Likes.MIN, Likes.MAX),
+  comments: Array.from({length: getRandomInteger(Comments.MIN, Comments.MAX)}, createComment),
 });
 
-const getPhotoArray = () => Array.from ({length: PHOTOS.MAX}, (_, index) => createPhoto(index + 1));
+const getPhotoArray = () => Array.from ({length: Photos.MAX}, (_, index) => createPhoto(index + 1));
 
 const PhotoArray = getPhotoArray();
 
