@@ -76,8 +76,8 @@ const createId = () => {
   return () => {
     id++;
     return id;
-  }
-}
+  };
+};
 
 const randomId = createId();
 
