@@ -87,3 +87,5 @@ const PhotoArray = getPhotoArray();
 
 // eslint-disable-next-line no-console
 console.log(PhotoArray);
+
+export {getPhotoArray};
