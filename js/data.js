@@ -83,9 +83,4 @@ const createPhoto = (index) => ({
 
 const getPhotoArray = () => Array.from ({length: Photos.MAX}, (_, index) => createPhoto(index + 1));
 
-const PhotoArray = getPhotoArray();
-
-// eslint-disable-next-line no-console
-console.log(PhotoArray);
-
 export {getPhotoArray};

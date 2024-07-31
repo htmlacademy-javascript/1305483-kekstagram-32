@@ -12,4 +12,7 @@ const createId = () => {
   return () => ++id;
 };
 
-export {getRandomInteger, getRandomArrayElement, createId};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+const isEnterKey = (evt) => evt.key === 'Enter';
+
+export {getRandomInteger, getRandomArrayElement, createId, isEscapeKey, isEnterKey};
