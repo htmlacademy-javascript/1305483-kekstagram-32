@@ -8,7 +8,7 @@ const createThumbnail = (picture) => {
   image.alt = picture.description;
   thumbnail.querySelector('.picture__likes').textContent = picture.likes;
   thumbnail.querySelector('.picture__comments').textContent = picture.comments.length;
-  return element;
+  return thumbnail;
 };
 
 const makeThumbnails = (pictures) => {
