@@ -1,5 +1,4 @@
-import {getPhotoArray} from './data.js';
-import {makeThumbnails} from './thumbnails.js';
+import { getPhotoArray } from './data.js';
+import { renderGallery } from './gallery.js';
 
-getPhotoArray();
-makeThumbnails(getPhotoArray());
+renderGallery(getPhotoArray());
