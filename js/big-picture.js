@@ -41,11 +41,11 @@ const onDocumentKeydown = (evt) => {
     evt.preventDefault();
     hideBigPicture();
   }
-}
+};
 
 const onCancelButtonClick = () => {
   hideBigPicture();
-}
+};
 
 const renderPictureDetails = ({ url, likes, description }) => {
   bigPictureElement.querySelector('.big-picture__img img').src = url;
