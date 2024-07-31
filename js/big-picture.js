@@ -30,17 +30,18 @@ const renderComments = (comments) => {
   commentListElement.append(fragment);
 };
 
+const onDocumentKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    // eslint-disable-next-line
+    hideBigPicture();
+  }
+};
+
 const hideBigPicture = () => {
   bigPictureElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
-};
-
-const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    hideBigPicture();
-  }
 };
 
 const onCancelButtonClick = () => {
