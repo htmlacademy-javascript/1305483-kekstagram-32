@@ -4,44 +4,41 @@ const commentShownCountElement = document.querySelector('.social__comment-shown-
 const commentTotalCountElement = document.querySelector('.social__comment-total-count');
 const commentsLoaderElement = document.querySelector('.comments-loader');
 const COMMENTS_PER_PORTION = 5;
-
+let commentsArray = [];
 let commentsShown = 0;
-let comments = [];
 
-const createComment = ({ avatar, name, message }) => {
-  const comment = commentElement.cloneNode(true);
-
-  comment.querySelector('.social__picture').src = avatar;
-  comment.querySelector('.social__picture').alt = name;
-  comment.querySelector('.social__text').textContent = message;
-
-  return comment;
-};
-
-const renderComments = () => {
-  commentsShown += COMMENTS_PER_PORTION;
-
-  if (commentsShown >= comments.length) {
+const createComments = () => {
+  const comments = commentsArray.slice(commentsShown, commentsShown + COMMENTS_PER_PORTION);
+  const commentsLength = comments.length + commentsShown;
+  comments.forEach(({avatar, name, message}) => {
+    const commentItemElement = commentElement.cloneNode(true);
+    const socialPictureElement = commentItemElement.querySelector('.social__picture');
+    socialPictureElement.src = avatar;
+    socialPictureElement.alt = name;
+    commentItemElement.querySelector('.social__text').textContent = message;
+    commentListElement.append(commentItemElement);
+  });
+  commentShownCountElement.textContent = commentsLength;
+  commentTotalCountElement.textContent = `${commentsArray.length}`;
+  if (commentsArray.length <= commentsLength) {
     commentsLoaderElement.classList.add('hidden');
-    commentsShown = comments.length;
-  } else {
-    commentsLoaderElement.classList.remove('hidden');
   }
-
-  const fragment = document.createDocumentFragment();
-  for (let i = 0; i < commentsShown; i++) {
-    const comment = createComment(comments[i]);
-    fragment.append(comment);
-  }
-
-  commentListElement.innerHTML = '';
-  commentListElement.append(fragment);
-  commentShownCountElement.textContent = commentsShown;
-  commentTotalCountElement.textContent = comments.length;
+  commentsShown += COMMENTS_PER_PORTION;
 };
 
-const onCommentsLoaderClick = () => renderComments();
+const clearComments = () => {
+  while (commentListElement.firstChild) {
+    commentListElement.removeChild(commentListElement.firstChild);
+  }
+  commentsShown = 0;
+  commentsLoaderElement.classList.remove('hidden');
+};
 
-commentsLoaderElement.addEventListener('click', onCommentsLoaderClick);
+const showComments = (сomments) => {
+  commentsArray = сomments;
+  clearComments();
+  createComments();
+  commentsLoaderElement.addEventListener('click', createComments);
+};
 
-export { renderComments };
+export {showComments};
