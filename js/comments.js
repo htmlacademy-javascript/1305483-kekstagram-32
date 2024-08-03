@@ -41,4 +41,4 @@ const showComments = (сomments) => {
   commentsLoaderElement.addEventListener('click', createComments);
 };
 
-export {showComments};
+export { showComments };

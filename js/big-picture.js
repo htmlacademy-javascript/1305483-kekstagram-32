@@ -10,7 +10,7 @@ const makeBigPicture = (listPictures) => {
     if (isEscapeKey(evt)) {
       evt.preventDefault();
       // eslint-disable-next-line
-    hideBigPicture();
+      hideBigPicture();
     }
   };
 
