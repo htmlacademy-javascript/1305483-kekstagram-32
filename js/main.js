@@ -1,8 +1,24 @@
-import './form.js';
-import { getPhotoArray } from './data.js';
 import { makeThumbnails } from './thumbnails.js';
 import { makeBigPicture } from './big-picture.js';
+import { getData, sendData } from './api.js';
+import { showAlert } from './util.js';
+import { setOnFormSubmit, hideModal } from './form.js';
+import { showSuccessMessage, showErrorMessage } from './message.js';
 
-const data = getPhotoArray();
-makeThumbnails(data);
-makeBigPicture(data);
+setOnFormSubmit(async (data) => {
+  try {
+    await sendData(data);
+    hideModal();
+    showSuccessMessage();
+  } catch {
+    showErrorMessage();
+  }
+});
+
+try {
+  const data = await getData();
+  makeThumbnails(data);
+  makeBigPicture(data);
+} catch {
+  showAlert();
+}
