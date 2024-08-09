@@ -17,10 +17,10 @@ const makeThumbnailElements = (pictures) => {
   picturesContainerElement.querySelectorAll('.picture').forEach((element) => element.remove());
   const fragment = document.createDocumentFragment();
   pictures.forEach((picture) => {
-    const thumbnail = createThumbnail(picture);
-    fragment.append(thumbnail);
+    const thumbnailElement = createThumbnail(picture);
+    fragment.append(thumbnailElement);
   });
-  picturesContainer.append(fragment);
+  picturesContainerElement.append(fragment);
 };
 
 export { makeThumbnailElements };

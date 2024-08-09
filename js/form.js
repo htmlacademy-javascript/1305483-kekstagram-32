@@ -19,12 +19,12 @@ const SubmitButtonText = {
 
 const bodyElement = document.querySelector('body');
 const formElement = document.querySelector('.img-upload__form');
-const overlayElement = form.querySelector('.img-upload__overlay');
-const cancelButtonElement = form.querySelector('.img-upload__cancel');
-const fileFieldElement = form.querySelector('.img-upload__input');
-const hashtagFieldElement = form.querySelector('.text__hashtags');
-const commentFieldElement = form.querySelector('.text__description');
-const submitButtonElement = form.querySelector('.img-upload__submit');
+const overlayElement = formElement.querySelector('.img-upload__overlay');
+const cancelButtonElement = formElement.querySelector('.img-upload__cancel');
+const fileFieldElement = formElement.querySelector('.img-upload__input');
+const hashtagFieldElement = formElement.querySelector('.text__hashtags');
+const commentFieldElement = formElement.querySelector('.text__description');
+const submitButtonElement = formElement.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(formElement, {
   classTo: 'img-upload__field-wrapper',
