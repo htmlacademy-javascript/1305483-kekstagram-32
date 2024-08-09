@@ -1,14 +1,14 @@
 import { isEscapeKey } from './util.js';
 
-const successMessage = document.querySelector('#success').content.querySelector('.success');
-const errorMessage = document.querySelector('#error').content.querySelector('.error');
-const body = document.querySelector('body');
+const successMessageElement = document.querySelector('#success').content.querySelector('.success');
+const errorMessageElement = document.querySelector('#error').content.querySelector('.error');
+const bodyElement = document.querySelector('body');
 
 const hideMessage = () => {
   const messageElement = document.querySelector('.success') || document.querySelector('.error');
   messageElement.remove();
   document.removeEventListener('keydown', onDocumentKeydown);
-  document.body.removeEventListener('click', onBodyClick);
+  document.bodyElement.removeEventListener('click', onBodyClick);
 };
 
 function onBodyClick(evt) {
@@ -28,17 +28,17 @@ function onDocumentKeydown(evt) {
 }
 
 const showMessage = (messageElement, closeButtonClass) => {
-  body.append(messageElement);
+  bodyElement.append(messageElement);
   document.addEventListener('keydown', onDocumentKeydown);
-  body.addEventListener('click', onBodyClick);
+  bodyElement.addEventListener('click', onBodyClick);
   messageElement.querySelector(closeButtonClass).addEventListener('click', hideMessage);
 };
 
 const showSuccessMessage = () => {
-  showMessage(successMessage, '.success__button');
+  showMessage(successMessageElement, '.success__button');
 };
 const showErrorMessage = () => {
-  showMessage(errorMessage, '.error__button');
+  showMessage(errorMessageElement, '.error__button');
 };
 
 export { showSuccessMessage, showErrorMessage };

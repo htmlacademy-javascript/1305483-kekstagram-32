@@ -1,7 +1,7 @@
 const ALERT_SHOW_TIME = 5000;
-const dataErrorTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
+const dataErrorTemplateElement = document.querySelector('#data-error').content.querySelector('.data-error');
 const showAlert = () => {
-  const dataErrorElement = dataErrorTemplate.cloneNode(true);
+  const dataErrorElement = dataErrorTemplateElement.cloneNode(true);
   document.body.append(dataErrorElement);
   setTimeout(() => {
     dataErrorElement.remove();
@@ -11,4 +11,12 @@ const showAlert = () => {
 const isEscapeKey = (evt) => evt.key === 'Escape';
 const isEnterKey = (evt) => evt.key === 'Enter';
 
-export { showAlert, isEscapeKey, isEnterKey };
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutID;
+  return (...rest) => {
+    clearTimeout(timeoutID);
+    timeoutID = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export { showAlert, isEscapeKey, isEnterKey, debounce };
