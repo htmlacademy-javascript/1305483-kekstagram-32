@@ -1,4 +1,4 @@
-import { makeThumbnails } from './thumbnails.js';
+import { makeThumbnailElements } from './thumbnails.js';
 import { makeBigPicture } from './big-picture.js';
 import { getData, sendData } from './api.js';
 import { debounce, showAlert } from './util.js';
@@ -18,10 +18,10 @@ setOnFormSubmit(async (data) => {
 
 try {
   const data = await getData();
-  const debounceMakeThumbnails = debounce(makeThumbnails);
-  initFilter(data, debounceMakeThumbnails);
-  makeThumbnails(getFilteredPictures());
-  makeThumbnails(data);
+  const debounceMakeThumbnailElements = debounce(makeThumbnailElements);
+  initFilter(data, debounceMakeThumbnailElements);
+  makeThumbnailElements(getFilteredPictures());
+  makeThumbnailElements(data);
   makeBigPicture(data);
 } catch {
   showAlert();
