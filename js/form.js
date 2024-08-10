@@ -6,6 +6,7 @@ import {
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 const errorText = {
   INVALID_COUNT: `Максимум ${MAX_HASHTAG_COUNT} хэштегов`,
   NOT_UNIQUE: 'Хэштеги должны быть уникальными',
@@ -25,6 +26,8 @@ const fileFieldElement = formElement.querySelector('.img-upload__input');
 const hashtagFieldElement = formElement.querySelector('.text__hashtags');
 const commentFieldElement = formElement.querySelector('.text__description');
 const submitButtonElement = formElement.querySelector('.img-upload__submit');
+const photoPreviewElement = formElement.querySelector('.img-upload__preview img');
+const effectsPreviewsElements = formElement.querySelectorAll('.effects__preview');
 
 const pristine = new Pristine(formElement, {
   classTo: 'img-upload__field-wrapper',
@@ -59,6 +62,13 @@ const isTextFieldFocused = () =>
   document.activeElement === hashtagFieldElement ||
   document.activeElement === commentFieldElement;
 
+const isErrorMessageShown = () => Boolean(document.querySelector('.error'));
+
+const isValidType = (file) => {
+  const fileName = file.name.toLowerCase();
+  return FILE_TYPES.some((it) => fileName.endsWith(it));
+};
+
 const normalizeTags = (tagString) => tagString
   .trim()
   .split(' ')
@@ -73,8 +83,6 @@ const hasUniqueTags = (value) => {
   return lowerCaseTags.length === new Set(lowerCaseTags).size;
 };
 
-const isErrorMessageShown = () => Boolean(document.querySelector('.error'));
-
 function onDocumentKeydown(evt) {
   if (evt.key === 'Escape' && !isTextFieldFocused() && !isErrorMessageShown()) {
     evt.preventDefault();
@@ -87,6 +95,13 @@ const onCancelButtonClick = () => {
 };
 
 const onFileInputChange = () => {
+  const file = fileFieldElement.files[0];
+  if (file && isValidType(file)) {
+    photoPreviewElement.src = URL.createObjectURL(file);
+    effectsPreviewsElements.forEach((preview) => {
+      preview.style.backgroundImage = `url('${photoPreviewElement.src}')`;
+    });
+  }
   showModal();
 };
 

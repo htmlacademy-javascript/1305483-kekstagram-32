@@ -8,7 +8,7 @@ const hideMessage = () => {
   const messageElement = document.querySelector('.success') || document.querySelector('.error');
   messageElement.remove();
   document.removeEventListener('keydown', onDocumentKeydown);
-  document.bodyElement.removeEventListener('click', onBodyClick);
+  bodyElement.removeEventListener('click', onBodyClick);
 };
 
 function onBodyClick(evt) {
