@@ -4,7 +4,7 @@ import { showComments } from './comments.js';
 const makeBigPicture = (listPictures) => {
   const picturesContainerElement = document.querySelector('.pictures');
   const bigPictureElement = document.querySelector('.big-picture');
-  const bigPictureCancelElement = document.querySelector('.big-picture__cancel');
+  const bigPictureCancelElement = bigPictureElement.querySelector('.big-picture__cancel');
 
   const onDocumentKeydown = (evt) => {
     if (isEscapeKey(evt)) {

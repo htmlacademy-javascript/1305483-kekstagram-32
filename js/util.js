@@ -1,4 +1,5 @@
 const ALERT_SHOW_TIME = 5000;
+const DEFAULT_DEBOUNCE_VALUE = 500;
 const dataErrorTemplateElement = document.querySelector('#data-error').content.querySelector('.data-error');
 const showAlert = () => {
   const dataErrorElement = dataErrorTemplateElement.cloneNode(true);
@@ -11,7 +12,7 @@ const showAlert = () => {
 const isEscapeKey = (evt) => evt.key === 'Escape';
 const isEnterKey = (evt) => evt.key === 'Enter';
 
-const debounce = (callback, timeoutDelay = 500) => {
+const debounce = (callback, timeoutDelay = DEFAULT_DEBOUNCE_VALUE) => {
   let timeoutID;
   return (...rest) => {
     clearTimeout(timeoutID);
